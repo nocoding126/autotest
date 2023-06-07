@@ -42,7 +42,7 @@ def format_class_name():
             with open(_file_path, 'r', encoding='utf-8') as f:  # 读取文件,正则匹配类名及类实例化对象，并替换成模块的驼峰命名
                 lines = f.read()
                 lines = re.sub(r'class (\w+)', 'class ' + snake_str, lines)
-                lines = re.sub(r'\s+\(\)\.', snake_str + '().', lines)
+                lines = re.sub(r'\s+(\w+)\(\)\.', '\n<TAB>' + snake_str + '().', lines)
             with open(_file_path, 'w', encoding='utf-8') as f:  # 写入文件
                 f.write(lines)
 
