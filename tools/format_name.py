@@ -45,6 +45,7 @@ def format_class_name():
                 lines = re.sub(r'\s+(\w+)\(\)\.', '\n\t' + snake_str + '().', lines)
             with open(_file_path, 'w', encoding='utf-8') as f:  # 写入文件
                 f.write(lines)
+            print('格式化类名成功！')
 
 
 def comment_script_name():
