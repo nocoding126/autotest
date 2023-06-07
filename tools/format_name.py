@@ -11,7 +11,7 @@
 import os
 import importlib
 import inspect
-from tools.util import get_py_file_path
+from tools.util import get_py_file_path, snake_to_camel
 
 
 ROOT_FILE_DIR = os.path.dirname(os.path.dirname(__file__))  # 获取项目的路径
@@ -25,7 +25,6 @@ def format_class_name():
     for _file_path in files_path:
         testcases_file_path = _file_path.replace(ROOT_FILE_DIR, '')
         module_path = testcases_file_path.strip('.py').strip('/').replace('/', '.')  # 获取模块的路径
-        print('模块路径', module_path)
         module_name = testcases_file_path.split('/')[-1]
         print('模块名称', module_name)
         try:
@@ -37,9 +36,18 @@ def format_class_name():
         for name, obj in inspect.getmembers(test_module, inspect.isclass):
             if name == 'TestCase':
                 continue
-            print(name, obj)
-            setattr(obj, obj.__name__, module_name[:-3])
-            delattr(obj, name)
+            # print(name, obj)
+            snake_str = snake_to_camel(module_name)
+            print(snake_str)
+            print(_file_path)
+            # with open(_file_path, 'r+', encoding='utf-8') as f:
+            #     lines = f.readlines()
+            #     print(lines)
+            #     break
+            # if name == module_name[:-3]:
+            #     continue
+            # else:
+            #     print('重命名成功！')
 
 
 def comment_script_name():
@@ -64,4 +72,4 @@ def comment_script_name():
 
 
 if __name__ == '__main__':
-    comment_script_name()
+    format_class_name()

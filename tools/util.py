@@ -36,6 +36,26 @@ def write_excel(data):
     wb.save('testcases.xlsx')
 
 
+def snake_to_camel(snake_str):
+    """蛇型命名转为驼峰命名"""
+    if not snake_str:
+        return snake_str
+    elif snake_str.endswith('_implement.py'):
+        snake_str = snake_str[:-13]
+    else:
+        snake_str = snake_str[:-3]
+    camel_res = snake_str[0].upper()
+
+    flag = False
+    for letter in snake_str[1:]:
+        if letter == '_':
+            flag = True
+            continue
+        camel_res += letter.upper() if flag else letter
+        flag = False
+    return camel_res
+
+
 if __name__ == '__main__':
     files_path = get_py_file_path('testcases_001')
     print(files_path)
