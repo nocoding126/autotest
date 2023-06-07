@@ -3,3 +3,4 @@
 *.xlsx
 tools/*.xlsx
 testcases_001
+tools/__pycache__/
